@@ -12,7 +12,7 @@ declare -r logfile="${PROJ_ROOT}/build.log"
 declare JOBS
 declare Darwin_flags
 
-GCC_PKG="gcc-12.2.0"
+GCC_PKG="gcc-12-branch-gcc-12.3-darwin-r0"
 GCC_SUFFIX=".tar.gz"
 GMP_PKG="gmp-6.2.1"
 GMP_SUFFIX=".tar.bz2"
@@ -158,21 +158,24 @@ function build_gcc()
     cd ${GCC_PKG}
     mkdir build
     cd build
-    ../configure --disable-bootstrap \
-		 --enable-languages=c,c++,lto \
-		 --prefix="${GCC_INSTALL}" \
-		 --mandir="${GCC_INSTALL}/share/man" \
-		 --infodir="${GCC_INSTALL}/share/info" \
-		 --enable-shared \
-		 --disable-multilib \
-		 --enable-__cxa_atexit \
-		 --disable-libunwind-exceptions \
+    ../configure --prefix="${GCC_INSTALL}" \
+		 --libdir="${GCC_INSTALL}/lib/gcc/12" \
+		 --disable-nls --enable-checking=release \
 		 --with-gcc-major-version-only \
+		 --enable-languages=c,c++,objc,obj-c++,fortran \
+		 --program-suffix=-12 \
+		 --with-gmp=/opt/homebrew/opt/gmp \
+		 --with-mpfr=/opt/homebrew/opt/mpfr \
+		 --with-mpc=/opt/homebrew/opt/libmpc \
+		 --with-isl=/opt/homebrew/opt/isl \
+		 --with-zstd=/opt/homebrew/opt/zstd  \
+		 --with-system-zlib \
+		 --build=aarch64-apple-darwin23 \
+		 --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk \
+		 --with-ld=/Library/Developer/CommandLineTools/usr/bin/ld-classic \
 		 --enable-plugin \
-		 --enable-lto \
-		 --with-gmp=${DEP_INSTALL} \
-		 --with-mpfr=${DEP_INSTALL} \
-		 --with-mpc=${DEP_INSTALL} ${Darwin_flags} || { echo "gcc configure failed"; return 1; }
+		 --enable-lto || { echo "gcc configure failed"; return 1; }
+    
     make -j${JOBS} || { echo "gcc make failed"; return 1; }
     make install || return 1
     return 0
@@ -180,7 +183,7 @@ function build_gcc()
 
 function main()
 {
-    build_gcc_prerequist || { echo "prerequist build failed."; exit 1; }
+#    build_gcc_prerequist || { echo "prerequist build failed."; exit 1; }
     build_gcc || { echo "build gcc failed"; exit 1; }
 }
 

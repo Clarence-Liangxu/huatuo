@@ -1,17 +1,17 @@
 # Common makefile to be included from all other makefiles
 
 # Where we installed gcc and its headers
-INSTALLDIR=$(abspath ../gcc-install)
+INSTALLDIR=$(abspath ../open_source/gcc-install)
 
-CC=$(INSTALLDIR)/bin/gcc
-CXX=$(INSTALLDIR)/bin/g++
+CC=$(INSTALLDIR)/bin/gcc-12
+CXX=$(INSTALLDIR)/bin/g++-12
 PLUGINDIR=$(shell $(CC) -print-file-name=plugin)
 
-CXXFLAGS=-std=gnu++14 -fPIC -Wall -g -fno-rtti -I$(PLUGINDIR)/include
+CXXFLAGS=-std=gnu++14 -fPIC -Wall -g -fno-rtti -I$(PLUGINDIR)/include -I/opt/homebrew/include
 # This is a side effect of using C++11
-CXXFLAGS+=-Wno-literal-suffix
+CXXFLAGS+=-Wno-literal-suffix -dynamiclib -undefined dynamic_lookup
 
-LDFLAGS=
+LDFLAGS=-dynamiclib -undefined dynamic_lookup
 LDADD=
 
 END=
