@@ -27,6 +27,7 @@ base_url='https://mirrors.aliyun.com/gnu'
 gmp_url="$base_url/gmp/$GMP_PKG$GMP_SUFFIX"
 mpc_url="$base_url/mpc/$MPC_PKG$MPC_SUFFIX"
 mpfr_url="$base_url/mpfr/$MPFR_PKG$MPFR_SUFFIX"
+isl_url="https://gcc.gnu.org/pub/gcc/infrastructure/isl-0.24.tar.bz2"
 gcc_url="$base_url/gcc/$GCC_PKG/$GCC_PKG$GCC_SUFFIX"
 
 OS="`uname`"
@@ -36,6 +37,9 @@ case $OS in
     'Darwin')
 	JOBS="$(sysctl -n hw.ncpu)"
 	Darwin_flags="--with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk"
+	gcc_url="https://codeload.github.com/iains/gcc-12-branch/tar.gz/refs/tags/gcc-12.3-darwin-r0"
+	export CC=gcc-14
+	export CXX=g++-14
 	;;
     'Linux')
 	JOBS="$(grep --count ^processor /proc/cpuinfo)"
@@ -69,8 +73,12 @@ function download_dependency()
 	wget $mpfr_url || { echo "download mpfr failed"; return 1; }
     fi
 
+    if [ ! -f $ISL_PKG$ISL_SUFFIX ]; then
+	wget $isl_url || { echo "download isl failed"; return 1; }
+    fi
+
     if [ ! -f $GCC_PKG$GCC_SUFFIX ]; then
-	wget $gcc_url || { echo "download gcc failed"; return 1; }
+	wget $gcc_url -O $GCC_PKG$GCC_SUFFIX || { echo "download gcc failed"; return 1; }
     fi
     
 
@@ -101,7 +109,8 @@ function build_isl()
     cd ${ISL_PKG}
     mkdir build
     cd build
-    ../configure --prefix=${DEP_INSTALL} --with-gmp=${DEP_INSTALL} || return 1
+    ../configure --prefix=${DEP_INSTALL} --with-gmp-prefix=${DEP_INSTALL} || return 1
+    
     make -j${JOBS} || return 1
     make install || return 1
     return 0
@@ -147,6 +156,7 @@ function build_gcc_prerequist()
     build_gmp || { echo "build gmp failed"; return 1; }
     build_mpfr || { echo "build mpfr failed"; return 1; }
     build_mpc || { echo "build mpc failed"; return 1; }
+    build_isl || { echo "build isl failed"; return 1; }
 }
 
 function build_gcc()
@@ -164,16 +174,17 @@ function build_gcc()
 		 --with-gcc-major-version-only \
 		 --enable-languages=c,c++,objc,obj-c++,fortran \
 		 --program-suffix=-12 \
-		 --with-gmp=/opt/homebrew/opt/gmp \
-		 --with-mpfr=/opt/homebrew/opt/mpfr \
-		 --with-mpc=/opt/homebrew/opt/libmpc \
-		 --with-isl=/opt/homebrew/opt/isl \
+		 --with-gmp="${GCC_INSTALL}" \
+		 --with-mpfr="${GCC_INSTALL}" \
+		 --with-mpc="${GCC_INSTALL}" \
+		 --with-isl="${GCC_INSTALL}" \
 		 --with-zstd=/opt/homebrew/opt/zstd  \
 		 --with-system-zlib \
 		 --build=aarch64-apple-darwin23 \
 		 --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk \
 		 --with-ld=/Library/Developer/CommandLineTools/usr/bin/ld-classic \
 		 --enable-plugin \
+		 --disable-bootstrap \
 		 --enable-lto || { echo "gcc configure failed"; return 1; }
     
     make -j${JOBS} || { echo "gcc make failed"; return 1; }
@@ -183,7 +194,7 @@ function build_gcc()
 
 function main()
 {
-#    build_gcc_prerequist || { echo "prerequist build failed."; exit 1; }
+    build_gcc_prerequist || { echo "prerequist build failed."; exit 1; }
     build_gcc || { echo "build gcc failed"; exit 1; }
 }
 
