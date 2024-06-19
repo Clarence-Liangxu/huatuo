@@ -43,4 +43,4 @@ include ./Makefile.common
 
 .PHONY: test
 test: $(PLUGIN)
-	$(CCPLUGIN) -c -o /dev/null ./testsuit/analyzer-verbosity-0.c
+	$(CCPLUGIN) -c -o /dev/null ./test/analyzer-verbosity-0.c

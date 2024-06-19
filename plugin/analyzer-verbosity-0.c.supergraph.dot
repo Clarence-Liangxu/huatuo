@@ -1,0 +1,399 @@
+digraph "supergraph" {
+  overlap=false;
+  compound=true;
+  subgraph "cluster_test_3" {
+style="dashed"; color="black"; label="test_3";
+    subgraph cluster_node_0 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 0 (bb: 0)";
+      node_0 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>ENTRY</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_1 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 1 (bb: 2)";
+      node_1 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">free (ptr_2(D));</TD></TR>
+<TR><TD ALIGN="LEFT">called_by_test_3 ();</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_2 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 2 (bb: 2)";
+      node_2 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">returning call: </TD></TR><TR><TD ALIGN="LEFT">called_by_test_3 ();</TD></TR>
+<TR><TD ALIGN="LEFT">free (ptr_2(D));</TD></TR>
+<TR><TD ALIGN="LEFT">return;</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_3 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 3 (bb: 1)";
+      node_3 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>EXIT</TD></TR>
+</TABLE>>];
+
+    }
+	node_0:s -> node_3:n [style="invis",constraint=true];
+  }
+  subgraph "cluster_called_by_test_3" {
+style="dashed"; color="black"; label="called_by_test_3";
+    subgraph cluster_node_4 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 4 (bb: 0)";
+      node_4 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>ENTRY</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_5 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 5 (bb: 2)";
+      node_5 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">return;</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_6 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 6 (bb: 1)";
+      node_6 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>EXIT</TD></TR>
+</TABLE>>];
+
+    }
+	node_4:s -> node_6:n [style="invis",constraint=true];
+  }
+  subgraph "cluster_test_2" {
+style="dashed"; color="black"; label="test_2";
+    subgraph cluster_node_7 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 7 (bb: 0)";
+      node_7 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>ENTRY</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_8 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 8 (bb: 2)";
+      node_8 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">switch (a_3(D)) &lt;default: &lt;L0&gt;, case 1: &lt;L1&gt;, case 3: &lt;L2&gt;&gt;</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_9 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 9 (bb: 3)";
+      node_9 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">&lt;L0&gt;:</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_10 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 10 (bb: 4)";
+      node_10 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">&lt;L1&gt;:</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_11 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 11 (bb: 5)";
+      node_11 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">&lt;L2&gt;:</TD></TR>
+<TR><TD ALIGN="LEFT">calls_free_2 (ptr_5(D));</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_12 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 12 (bb: 5)";
+      node_12 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">returning call: </TD></TR><TR><TD ALIGN="LEFT">calls_free_2 (ptr_5(D));</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_13 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 13 (bb: 6)";
+      node_13 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">.MEM_1 = PHI &lt;.MEM_4(D)(3), .MEM_4(D)(4), .MEM_6(5)&gt;</TD></TR>
+<TR><TD ALIGN="LEFT">switch (b_7(D)) &lt;default: &lt;L4&gt;, case 1: &lt;L5&gt;, case 42: &lt;L6&gt;&gt;</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_14 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 14 (bb: 7)";
+      node_14 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">&lt;L4&gt;:</TD></TR>
+<TR><TD ALIGN="LEFT">calls_free_2 (ptr_5(D));</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_15 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 15 (bb: 7)";
+      node_15 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">returning call: </TD></TR><TR><TD ALIGN="LEFT">calls_free_2 (ptr_5(D));</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_16 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 16 (bb: 8)";
+      node_16 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">&lt;L5&gt;:</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_17 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 17 (bb: 9)";
+      node_17 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">&lt;L6&gt;:</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_18 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 18 (bb: 10)";
+      node_18 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">.MEM_2 = PHI &lt;.MEM_8(7), .MEM_1(8), .MEM_1(9)&gt;</TD></TR>
+<TR><TD ALIGN="LEFT">return;</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_19 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 19 (bb: 1)";
+      node_19 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>EXIT</TD></TR>
+</TABLE>>];
+
+    }
+	node_7:s -> node_19:n [style="invis",constraint=true];
+  }
+  subgraph "cluster_calls_free_2" {
+style="dashed"; color="black"; label="calls_free_2";
+    subgraph cluster_node_20 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 20 (bb: 0)";
+      node_20 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>ENTRY</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_21 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 21 (bb: 2)";
+      node_21 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">free (ptr_2(D));</TD></TR>
+<TR><TD ALIGN="LEFT">return;</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_22 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 22 (bb: 1)";
+      node_22 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>EXIT</TD></TR>
+</TABLE>>];
+
+    }
+	node_20:s -> node_22:n [style="invis",constraint=true];
+  }
+  subgraph "cluster_test_1" {
+style="dashed"; color="black"; label="test_1";
+    subgraph cluster_node_23 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 23 (bb: 0)";
+      node_23 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>ENTRY</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_24 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 24 (bb: 2)";
+      node_24 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">if (a_3(D) != 0)</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_25 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 25 (bb: 3)";
+      node_25 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">calls_free_1 (ptr_5(D));</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_26 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 26 (bb: 3)";
+      node_26 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">returning call: </TD></TR><TR><TD ALIGN="LEFT">calls_free_1 (ptr_5(D));</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_27 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 27 (bb: 4)";
+      node_27 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">.MEM_1 = PHI &lt;.MEM_4(D)(2), .MEM_6(3)&gt;</TD></TR>
+<TR><TD ALIGN="LEFT">if (b_7(D) != 0)</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_28 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 28 (bb: 5)";
+      node_28 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">calls_free_1 (ptr_5(D));</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_29 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 29 (bb: 5)";
+      node_29 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">returning call: </TD></TR><TR><TD ALIGN="LEFT">calls_free_1 (ptr_5(D));</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_30 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 30 (bb: 6)";
+      node_30 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">.MEM_2 = PHI &lt;.MEM_1(4), .MEM_8(5)&gt;</TD></TR>
+<TR><TD ALIGN="LEFT">return;</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_31 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 31 (bb: 1)";
+      node_31 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>EXIT</TD></TR>
+</TABLE>>];
+
+    }
+	node_23:s -> node_31:n [style="invis",constraint=true];
+  }
+  subgraph "cluster_calls_free_1" {
+style="dashed"; color="black"; label="calls_free_1";
+    subgraph cluster_node_32 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 32 (bb: 0)";
+      node_32 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>ENTRY</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_33 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 33 (bb: 2)";
+      node_33 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD ALIGN="LEFT">free (ptr_2(D));</TD></TR>
+<TR><TD ALIGN="LEFT">return;</TD></TR>
+</TABLE>>];
+
+    }
+    subgraph cluster_node_34 {
+      style="solid";
+      color="black";
+      fillcolor="lightgrey";
+      label="sn: 34 (bb: 1)";
+      node_34 [shape=none,margin=0,style=filled,fillcolor=lightgrey,label=<<TABLE BORDER="0"><TR><TD>EXIT</TD></TR>
+</TABLE>>];
+
+    }
+	node_32:s -> node_34:n [style="invis",constraint=true];
+  }
+  node_0 -> node_1 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_0", lhead="cluster_node_1" headlabel=" (flags FALLTHRU)"];
+  node_2 -> node_3 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_2", lhead="cluster_node_3" headlabel=""];
+  node_4 -> node_5 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_4", lhead="cluster_node_5" headlabel=" (flags FALLTHRU)"];
+  node_5 -> node_6 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_5", lhead="cluster_node_6" headlabel=""];
+  node_7 -> node_8 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_7", lhead="cluster_node_8" headlabel=" (flags FALLTHRU)"];
+  node_8 -> node_9 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_8", lhead="cluster_node_9" headlabel="{default}"];
+  node_8 -> node_10 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_8", lhead="cluster_node_10" headlabel="{1}"];
+  node_8 -> node_11 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_8", lhead="cluster_node_11" headlabel="{3}"];
+  node_9 -> node_13 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_9", lhead="cluster_node_13" headlabel=" (flags FALLTHRU)"];
+  node_10 -> node_13 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_10", lhead="cluster_node_13" headlabel=" (flags FALLTHRU)"];
+  node_12 -> node_13 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_12", lhead="cluster_node_13" headlabel=" (flags FALLTHRU)"];
+  node_13 -> node_14 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_13", lhead="cluster_node_14" headlabel="{default}"];
+  node_13 -> node_16 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_13", lhead="cluster_node_16" headlabel="{1}"];
+  node_13 -> node_17 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_13", lhead="cluster_node_17" headlabel="{42}"];
+  node_15 -> node_18 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_15", lhead="cluster_node_18" headlabel=" (flags FALLTHRU)"];
+  node_16 -> node_18 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_16", lhead="cluster_node_18" headlabel=" (flags FALLTHRU)"];
+  node_17 -> node_18 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_17", lhead="cluster_node_18" headlabel=" (flags FALLTHRU)"];
+  node_18 -> node_19 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_18", lhead="cluster_node_19" headlabel=""];
+  node_20 -> node_21 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_20", lhead="cluster_node_21" headlabel=" (flags FALLTHRU)"];
+  node_21 -> node_22 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_21", lhead="cluster_node_22" headlabel=""];
+  node_23 -> node_24 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_23", lhead="cluster_node_24" headlabel=" (flags FALLTHRU)"];
+  node_24 -> node_25 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_24", lhead="cluster_node_25" headlabel="true (flags TRUE_VALUE)"];
+  node_24 -> node_27 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_24", lhead="cluster_node_27" headlabel="false (flags FALSE_VALUE)"];
+  node_26 -> node_27 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_26", lhead="cluster_node_27" headlabel=" (flags FALLTHRU)"];
+  node_27 -> node_30 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_27", lhead="cluster_node_30" headlabel="true (flags TRUE_VALUE)"];
+  node_27 -> node_28 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_27", lhead="cluster_node_28" headlabel="false (flags FALSE_VALUE)"];
+  node_29 -> node_30 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_29", lhead="cluster_node_30" headlabel=" (flags FALLTHRU)"];
+  node_30 -> node_31 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_30", lhead="cluster_node_31" headlabel=""];
+  node_32 -> node_33 [style="solid,bold", color=blue, weight=100, constraint=true, ltail="cluster_node_32", lhead="cluster_node_33" headlabel=" (flags FALLTHRU)"];
+  node_33 -> node_34 [style="solid,bold", color=black, weight=10, constraint=true, ltail="cluster_node_33", lhead="cluster_node_34" headlabel=""];
+  node_1 -> node_4 [style="solid,bold", color=red, weight=10, constraint=true, ltail="cluster_node_1", lhead="cluster_node_4" headlabel="call"];
+  node_11 -> node_20 [style="solid,bold", color=red, weight=10, constraint=true, ltail="cluster_node_11", lhead="cluster_node_20" headlabel="call"];
+  node_14 -> node_20 [style="solid,bold", color=red, weight=10, constraint=true, ltail="cluster_node_14", lhead="cluster_node_20" headlabel="call"];
+  node_25 -> node_32 [style="solid,bold", color=red, weight=10, constraint=true, ltail="cluster_node_25", lhead="cluster_node_32" headlabel="call"];
+  node_28 -> node_32 [style="solid,bold", color=red, weight=10, constraint=true, ltail="cluster_node_28", lhead="cluster_node_32" headlabel="call"];
+  node_6 -> node_2 [style="solid,bold", color=green, weight=10, constraint=true, ltail="cluster_node_6", lhead="cluster_node_2" headlabel="return"];
+  node_22 -> node_12 [style="solid,bold", color=green, weight=10, constraint=true, ltail="cluster_node_22", lhead="cluster_node_12" headlabel="return"];
+  node_22 -> node_15 [style="solid,bold", color=green, weight=10, constraint=true, ltail="cluster_node_22", lhead="cluster_node_15" headlabel="return"];
+  node_34 -> node_26 [style="solid,bold", color=green, weight=10, constraint=true, ltail="cluster_node_34", lhead="cluster_node_26" headlabel="return"];
+  node_34 -> node_29 [style="solid,bold", color=green, weight=10, constraint=true, ltail="cluster_node_34", lhead="cluster_node_29" headlabel="return"];
+  node_1 -> node_2 [style="dotted", color=black, weight=10, constraint=true, ltail="cluster_node_1", lhead="cluster_node_2" headlabel="intraproc link"];
+  node_11 -> node_12 [style="dotted", color=black, weight=10, constraint=true, ltail="cluster_node_11", lhead="cluster_node_12" headlabel="intraproc link"];
+  node_14 -> node_15 [style="dotted", color=black, weight=10, constraint=true, ltail="cluster_node_14", lhead="cluster_node_15" headlabel="intraproc link"];
+  node_25 -> node_26 [style="dotted", color=black, weight=10, constraint=true, ltail="cluster_node_25", lhead="cluster_node_26" headlabel="intraproc link"];
+  node_28 -> node_29 [style="dotted", color=black, weight=10, constraint=true, ltail="cluster_node_28", lhead="cluster_node_29" headlabel="intraproc link"];
+}
